@@ -5,22 +5,22 @@
 #include <string>
 #include <unordered_map>
 
-namespace csv_reader_spc
-{
-    std::vector<std::unordered_map<std::string, std::string>> convert_csv_to_object(std::string file_Path)
+using namespace std;
+
+    vector<unordered_map<string, string>> convert_csv_to_object(string file_Path)
     {
-        std::fstream fin; 
-        fin.open(file_Path, std::ios::in);
+        fstream fin; 
+        fin.open(file_Path, ios::in);
         
-        std::vector<std::unordered_map<std::string, std::string>> csv_data; 
-        std::string line, word;
-        std::vector<std::string> header; 
+        vector<unordered_map<string, string>> csv_data; 
+        string line, word;
+        vector<string> header; 
         int row_iterator = 0;
         
         while (getline(fin, line)) 
         {   
-            std::stringstream s(line);
-            std::unordered_map<std::string, std::string> csv_column_data;
+            stringstream s(line);
+            unordered_map<string, string> csv_column_data;
 
             if(row_iterator < 1)
             {
@@ -48,4 +48,3 @@ namespace csv_reader_spc
 
         return csv_data;
     }
-}
