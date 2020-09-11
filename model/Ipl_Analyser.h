@@ -13,7 +13,7 @@ class ipl_analyser
 public:
     ipl_analyser()
     {
-        this -> csv_data = convert_csv_to_object(file_path);
+        this->csv_data = convert_csv_to_object(file_path);
         update_player_record();
     }
 
@@ -24,7 +24,7 @@ public:
 
     void update_player_record()
     {
-        for(unordered_map<string, string> itr : csv_data)
+        for (unordered_map<string, string> itr : csv_data)
         {
             IplBatsmanStat most_runs(itr.at("PLAYER"));
             most_runs.set_match(stoi(itr.at("Mat")));
@@ -43,13 +43,19 @@ public:
 
     IplBatsmanStat find_top_batting_average()
     {
-        sort(player_records.begin(), player_records.end(),[] (
-           IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool
-            {
-                return (first_batsman.get_average() < second_batsman.get_average());
-            }
-        );
-        
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return (first_batsman.get_average() < second_batsman.get_average());
+        });
+
+        return player_records[player_records.size() - 1];
+    }
+
+    IplBatsmanStat find_top_striking_rates()
+    {
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return (first_batsman.get_strike_rate() < second_batsman.get_strike_rate());
+        });
+
         return player_records[player_records.size() - 1];
     }
 };

@@ -2,11 +2,11 @@
 
 using namespace std;
 
-class IplBatsmanStat 
-{    
+class IplBatsmanStat
+{
     string player, high_score;
     int match, innings, run, hundred, fifty, fours, six;
-    double  avg, strike_rate;
+    double avg, strike_rate;
 
 public:
     IplBatsmanStat(){};
@@ -22,7 +22,7 @@ public:
 
     void set_high_score(string high_score)
     {
-        this -> high_score = high_score;
+        this->high_score = high_score;
     }
 
     string get_high_score()
@@ -32,7 +32,7 @@ public:
 
     void set_match(int match)
     {
-        this -> match = match;
+        this->match = match;
     }
 
     int get_match()
@@ -42,7 +42,7 @@ public:
 
     void set_innings(int innings)
     {
-        this -> innings = innings;
+        this->innings = innings;
     }
 
     int get_innings()
@@ -52,17 +52,17 @@ public:
 
     void set_run(int run)
     {
-        this -> run = run;
+        this->run = run;
     }
 
     int get_run()
     {
         return run;
     }
-    
+
     void set_hundered(int hundered)
     {
-        this -> hundred = hundred;
+        this->hundred = hundred;
     }
 
     int get_hundered()
@@ -72,17 +72,17 @@ public:
 
     void set_fifty(int fifty)
     {
-        this -> fifty = fifty;
+        this->fifty = fifty;
     }
 
     int get_fifty()
     {
         return fifty;
     }
-    
+
     void set_fours(int fours)
     {
-        this -> fours = fours;
+        this->fours = fours;
     }
 
     int get_four()
@@ -92,7 +92,7 @@ public:
 
     void set_six(int six)
     {
-        this -> six = six;
+        this->six = six;
     }
 
     int get_six()
@@ -102,7 +102,7 @@ public:
 
     void set_average(double avg)
     {
-        this -> avg = avg;
+        this->avg = avg;
     }
 
     double get_average()
@@ -112,11 +112,11 @@ public:
 
     void set_strike_rate(double strike_rate)
     {
-        this -> strike_rate = strike_rate;
+        this->strike_rate = strike_rate;
     }
 
     double get_strike_rate()
     {
         return strike_rate;
     }
-};    
+};
