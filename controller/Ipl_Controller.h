@@ -15,8 +15,10 @@ public:
     void get_choice();
     void find_top_batting_average();
     void find_top_striking_rates();
+    void find_max_six_and_four();
     void display_top_batting_avg();
     void display_top_striking_rates();
+    void display_max_six_and_four();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -32,6 +34,7 @@ void Ipl_Controller ::display_screen()
     {
         TOP_BATTING_AVG = 1,
         TOP_STRIKING_RATES,
+        MAXIMUM_SIX_AND_FOUR,
         CLEAR_SCREEN,
         EXIT
     };
@@ -40,7 +43,8 @@ void Ipl_Controller ::display_screen()
     {
         cout << "1. Find Top Batting Average"
              << "\n2. Find Top Striking Rates"
-             << "\n3. Clear Screen\n4. Exit\n"
+             << "\n3. Find Cricketer hit maximum 6s and 4s"
+             << "\n4. Clear Screen\n5. Exit\n"
              << endl;
         switch (view.take_input_as_choice())
         {
@@ -49,6 +53,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::TOP_STRIKING_RATES:
             find_top_striking_rates();
+            break;
+        case choice::MAXIMUM_SIX_AND_FOUR:
+            find_max_six_and_four();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -90,4 +97,15 @@ void Ipl_Controller ::display_top_striking_rates()
 {
     view.display_top_striking_rate_with_name(batsman.get_player_name(),
                                              batsman.get_strike_rate());
+}
+
+void Ipl_Controller ::find_max_six_and_four()
+{
+    this->batsman = analyser.find_max_six_and_four();
+    display_max_six_and_four();
+}
+
+void Ipl_Controller ::display_max_six_and_four()
+{
+    view.display_max_six_and_four(batsman.get_player_name(), batsman.get_four(), batsman.get_six());
 }
