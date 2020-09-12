@@ -17,11 +17,13 @@ public:
     void find_top_striking_rates();
     void find_max_six_and_four();
     void find_best_strike_rate_with_sixs_and_fours();
+    void find_great_average_with_best_strike_rate();
+    void find_Max_run_with_best_avg();
     void display_top_batting_avg();
     void display_top_striking_rates();
     void display_max_six_and_four();
     void display_best_strike_rate_with_sixs_and_fours();
-    void find_great_average_with_best_strike_rate();
+    void display_Max_run_with_best_avg();
     void display_great_average_with_best_strike_rate();
 };
 
@@ -41,6 +43,7 @@ void Ipl_Controller ::display_screen()
         MAXIMUM_SIX_AND_FOUR,
         SR_WITH_SIX_AND_FOUR,
         AVG_WITH_STRIKE_RATE,
+        MAX_RUN_WITH_BEST_AVG,
         CLEAR_SCREEN,
         EXIT
     };
@@ -52,7 +55,8 @@ void Ipl_Controller ::display_screen()
              << "\n3. Find Cricketer hit maximum 6s and 4s"
              << "\n4. Find Max Strike Rate With Best Six And Four"
              << "\n5. Find Great Batting Average With Strike Rate"
-             << "\n6. Clear Screen\n7. Exit\n"
+             << "\n6. Find Max Run With Best Average"
+             << "\n7. Clear Screen\n8. Exit\n"
              << endl;
         switch (view.take_input_as_choice())
         {
@@ -68,9 +72,12 @@ void Ipl_Controller ::display_screen()
         case choice::SR_WITH_SIX_AND_FOUR:
             find_best_strike_rate_with_sixs_and_fours();
             break;
-        case choice::AVG_WITH_STRIKE_RATE:  
+        case choice::AVG_WITH_STRIKE_RATE:
             find_great_average_with_best_strike_rate();
-            break;     
+            break;
+        case choice::MAX_RUN_WITH_BEST_AVG:
+            find_Max_run_with_best_avg();
+            break;
         case choice::CLEAR_SCREEN:
             system("cls");
             break;
@@ -138,11 +145,22 @@ void Ipl_Controller::display_best_strike_rate_with_sixs_and_fours()
 
 void Ipl_Controller::find_great_average_with_best_strike_rate()
 {
-    this -> batsman = analyser.find_great_average_with_best_strike_rate();
+    this->batsman = analyser.find_great_average_with_best_strike_rate();
     display_great_average_with_best_strike_rate();
 }
 
 void Ipl_Controller::display_great_average_with_best_strike_rate()
 {
-    view.find_great_average_with_best_strike_rate(batsman.get_player_name(), batsman.get_average(), batsman.get_strike_rate());
+    view.display_great_average_with_best_strike_rate(batsman.get_player_name(), batsman.get_average(), batsman.get_strike_rate());
+}
+
+void Ipl_Controller::find_Max_run_with_best_avg()
+{
+   this->batsman = analyser.find_Max_run_with_best_avg();
+   display_Max_run_with_best_avg();
+} 
+
+void Ipl_Controller::display_Max_run_with_best_avg()
+{
+    view.display_Max_run_with_best_avg(batsman.get_player_name(), batsman.get_run(), batsman.get_average());
 }

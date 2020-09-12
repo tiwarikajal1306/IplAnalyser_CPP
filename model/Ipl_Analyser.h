@@ -70,9 +70,8 @@ public:
     {
         vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return ((first_batsman.get_strike_rate() > second_batsman.get_strike_rate()) && 
-                            (first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
-                            + second_batsman.get_four()));
+            return ((first_batsman.get_strike_rate() > second_batsman.get_strike_rate()) &&
+                    (first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six() + second_batsman.get_four()));
         });
 
         return player_records.at(0);
@@ -82,10 +81,21 @@ public:
     {
         vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return ((first_batsman.get_average() < second_batsman.get_average()) && 
-                            (first_batsman.get_strike_rate() < second_batsman.get_strike_rate()));
+            return ((first_batsman.get_average() < second_batsman.get_average()) &&
+                    (first_batsman.get_strike_rate() < second_batsman.get_strike_rate()));
         });
 
         return player_records[player_records.size() - 1];
+    }
+
+    IplBatsmanStat find_Max_run_with_best_avg()
+    {
+        vector<IplBatsmanStat> player_records = batsman_records;
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return ((first_batsman.get_run() > second_batsman.get_run() &&
+                     first_batsman.get_average() > second_batsman.get_average()));
+        });
+
+        return player_records.at(0);
     }
 };
