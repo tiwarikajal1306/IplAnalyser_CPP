@@ -128,4 +128,13 @@ public:
 
         return player_records.at(0);
     }
+
+    IplBowler find_top_strike_rate_of_bowler()
+    {
+        vector<IplBowler> player_records = bowler_records;
+        sort(player_records.begin(), player_records.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return (first_bowler.get_strike_rate() > second_bowler.get_strike_rate());
+        });
+        return player_records.at(0);
+    }
 };

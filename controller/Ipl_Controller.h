@@ -22,13 +22,8 @@ public:
     void find_best_strike_rate_with_sixs_and_fours();
     void find_great_average_with_best_strike_rate();
     void find_Max_run_with_best_avg();
-    void display_top_batting_avg();
-    void display_top_striking_rates();
-    void display_max_six_and_four();
-    void display_best_strike_rate_with_sixs_and_fours();
-    void display_Max_run_with_best_avg();
-    void display_great_average_with_best_strike_rate();
     void find_top_bowling_avg();
+    void find_top_strike_rate_of_bowler();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -51,6 +46,7 @@ void Ipl_Controller ::display_screen()
         AVG_WITH_STRIKE_RATE,
         MAX_RUN_WITH_BEST_AVG,
         TOP_BOWLING_AVERAGE,
+        TOP_STRIKE_RATE_OF_BOWLER,
         CLEAR_SCREEN,
         EXIT
     };
@@ -64,7 +60,8 @@ void Ipl_Controller ::display_screen()
              << "\n5. Find Great Batting Average With Strike Rate"
              << "\n6. Find Max Run With Best Average"
              << "\n7. Find Top Bowling Average"
-             << "\n8. Clear Screen\n9. Exit\n"
+             << "\n8. Find Top Striking Rate Of Bowler"
+             << "\n9. Clear Screen\n10. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -89,6 +86,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::TOP_BOWLING_AVERAGE:
             find_top_bowling_avg();
+            break;
+        case choice::TOP_STRIKE_RATE_OF_BOWLER:
+            find_top_strike_rate_of_bowler();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -147,4 +147,10 @@ void Ipl_Controller::find_top_bowling_avg()
 {
     this->bowler = analyser.find_top_bowling_avg();
     view.show_top_bowling_avg(bowler.get_player_name(), bowler.get_average());
+}
+
+void Ipl_Controller::find_top_strike_rate_of_bowler()
+{
+    this->bowler = analyser.find_top_strike_rate_of_bowler();
+    view.show_top_strike_rate_of_bowler(bowler.get_player_name(), bowler.get_strike_rate());
 }
