@@ -9,6 +9,7 @@ public:
     void display_top_batting_avg_with_name(string cricketer_name, double batting_avg);
     void display_top_striking_rate_with_name(string cricketer_name, double striking_rate);
     void display_max_six_and_four(string cricketer_name, int four, int six);
+    void display_best_strike_rate_sixs_and_fours(string cricketer_name, double strike_rate, int six, int four);
 };
 
 int IplAnalyserView::take_input_as_choice()
@@ -36,5 +37,11 @@ void IplAnalyserView::display_top_striking_rate_with_name(string cricketer_name,
 void IplAnalyserView::display_max_six_and_four(string cricketer_name, int four, int six)
 {
     cout << "Name Of Cricketer: " << cricketer_name << "\nFour: " << four << "\nSix: "
+         << six << endl;
+}
+
+void IplAnalyserView::display_best_strike_rate_sixs_and_fours(string cricketer_name, double strike_rate, int six, int four)
+{
+    cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: " << strike_rate << "\nFour: " << four << "\nSix: "
          << six << endl;
 }

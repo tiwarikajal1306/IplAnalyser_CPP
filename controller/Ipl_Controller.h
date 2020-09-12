@@ -16,9 +16,11 @@ public:
     void find_top_batting_average();
     void find_top_striking_rates();
     void find_max_six_and_four();
+    void find_best_strike_rate_with_sixs_and_fours();
     void display_top_batting_avg();
     void display_top_striking_rates();
     void display_max_six_and_four();
+    void display_best_strike_rate_with_sixs_and_fours();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -35,6 +37,7 @@ void Ipl_Controller ::display_screen()
         TOP_BATTING_AVG = 1,
         TOP_STRIKING_RATES,
         MAXIMUM_SIX_AND_FOUR,
+        SR_WITH_SIX_AND_FOUR,
         CLEAR_SCREEN,
         EXIT
     };
@@ -44,7 +47,8 @@ void Ipl_Controller ::display_screen()
         cout << "1. Find Top Batting Average"
              << "\n2. Find Top Striking Rates"
              << "\n3. Find Cricketer hit maximum 6s and 4s"
-             << "\n4. Clear Screen\n5. Exit\n"
+             << "\n4. Find Max Strike Rate With Best Six And Four"
+             << "\n5. Clear Screen\n6. Exit\n"
              << endl;
         switch (view.take_input_as_choice())
         {
@@ -56,6 +60,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::MAXIMUM_SIX_AND_FOUR:
             find_max_six_and_four();
+            break;
+        case choice::SR_WITH_SIX_AND_FOUR:
+            find_best_strike_rate_with_sixs_and_fours();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -108,4 +115,16 @@ void Ipl_Controller ::find_max_six_and_four()
 void Ipl_Controller ::display_max_six_and_four()
 {
     view.display_max_six_and_four(batsman.get_player_name(), batsman.get_four(), batsman.get_six());
+}
+
+void Ipl_Controller::find_best_strike_rate_with_sixs_and_fours()
+{
+    this->batsman = analyser.find_best_strike_rate_with_sixs_and_fours();
+    display_best_strike_rate_with_sixs_and_fours();
+}
+
+void Ipl_Controller::display_best_strike_rate_with_sixs_and_fours()
+{
+    view.display_best_strike_rate_sixs_and_fours(batsman.get_player_name(), batsman.get_strike_rate(),
+                                                 batsman.get_six(), batsman.get_four());
 }
