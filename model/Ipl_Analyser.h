@@ -1,23 +1,27 @@
 #include "../utility/csv_reader.h"
 #include "IplBatsmanStat.h"
+#include "IplBowling.h"
 #include <algorithm>
 
 using namespace std;
 
 class ipl_analyser
 {
-    string file_path = "../resources/MostRuns.csv";
+
     vector<unordered_map<string, string>> csv_data;
     vector<IplBatsmanStat> batsman_records;
+    vector<IplBowler> bowler_records;
 
 public:
-    ipl_analyser()
+    void load_csv_file(string file_path_batsman, string file_path_bowler)
     {
-        this->csv_data = convert_csv_to_object(file_path);
-        update_player_record();
+        this->csv_data = convert_csv_to_object(file_path_batsman);
+        update_batsman_record();
+        this->csv_data = convert_csv_to_object(file_path_bowler);
+        update_bowler_record();
     }
 
-    void update_player_record()
+    void update_batsman_record()
     {
         for (unordered_map<string, string> itr : csv_data)
         {
@@ -33,6 +37,22 @@ public:
             most_runs.set_six(stoi(itr.at("6s")));
             most_runs.set_strike_rate(stod(itr.at("SR")));
             batsman_records.push_back(most_runs);
+        }
+    }
+
+    void update_bowler_record()
+    {
+        for (std::unordered_map<std::string, std::string> itr : csv_data)
+        {
+            IplBowler most_wkts(itr.at("PLAYER"));
+            most_wkts.set_run(std::stoi(itr.at("Runs")));
+            most_wkts.set_wickets(std::stoi(itr.at("Wkts")));
+            most_wkts.set_average(std::stod(itr.at("Avg")));
+            most_wkts.set_fours_wkts(std::stoi(itr.at("4w")));
+            most_wkts.set_five_wkts(std::stoi(itr.at("5w")));
+            most_wkts.set_strike_rate(std::stod(itr.at("SR")));
+            most_wkts.set_economy_rate(std::stod(itr.at("Econ")));
+            bowler_records.push_back(most_wkts);
         }
     }
 
@@ -94,6 +114,16 @@ public:
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
             return ((first_batsman.get_run() > second_batsman.get_run() &&
                      first_batsman.get_average() > second_batsman.get_average()));
+        });
+
+        return player_records.at(0);
+    }
+
+    IplBowler find_top_bowling_avg()
+    {
+        vector<IplBowler> player_records = bowler_records;
+        sort(player_records.begin(), player_records.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return (first_bowler.get_average() > second_bowler.get_average());
         });
 
         return player_records.at(0);

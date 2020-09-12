@@ -8,6 +8,9 @@ class Ipl_Controller
     IplAnalyserView view;
     ipl_analyser analyser;
     IplBatsmanStat batsman;
+    IplBowler bowler;
+    string file_path_batsman = "../resources/MostRuns.csv";
+    string file_path_bowler = "../resources/MostWkts.csv";
 
 public:
     void show_Welcome_Msg();
@@ -25,6 +28,7 @@ public:
     void display_best_strike_rate_with_sixs_and_fours();
     void display_Max_run_with_best_avg();
     void display_great_average_with_best_strike_rate();
+    void find_top_bowling_avg();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -34,6 +38,8 @@ void Ipl_Controller ::show_Welcome_Msg()
 
 void Ipl_Controller ::display_screen()
 {
+    analyser.load_csv_file(file_path_batsman, file_path_bowler);
+
     bool start = true;
 
     enum choice
@@ -44,6 +50,7 @@ void Ipl_Controller ::display_screen()
         SR_WITH_SIX_AND_FOUR,
         AVG_WITH_STRIKE_RATE,
         MAX_RUN_WITH_BEST_AVG,
+        TOP_BOWLING_AVERAGE,
         CLEAR_SCREEN,
         EXIT
     };
@@ -56,8 +63,10 @@ void Ipl_Controller ::display_screen()
              << "\n4. Find Max Strike Rate With Best Six And Four"
              << "\n5. Find Great Batting Average With Strike Rate"
              << "\n6. Find Max Run With Best Average"
-             << "\n7. Clear Screen\n8. Exit\n"
+             << "\n7. Find Top Bowling Average"
+             << "\n8. Clear Screen\n9. Exit\n"
              << endl;
+
         switch (view.take_input_as_choice())
         {
         case choice::TOP_BATTING_AVG:
@@ -77,6 +86,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::MAX_RUN_WITH_BEST_AVG:
             find_Max_run_with_best_avg();
+            break;
+        case choice::TOP_BOWLING_AVERAGE:
+            find_top_bowling_avg();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -156,11 +168,17 @@ void Ipl_Controller::display_great_average_with_best_strike_rate()
 
 void Ipl_Controller::find_Max_run_with_best_avg()
 {
-   this->batsman = analyser.find_Max_run_with_best_avg();
-   display_Max_run_with_best_avg();
-} 
+    this->batsman = analyser.find_Max_run_with_best_avg();
+    display_Max_run_with_best_avg();
+}
 
 void Ipl_Controller::display_Max_run_with_best_avg()
 {
     view.display_Max_run_with_best_avg(batsman.get_player_name(), batsman.get_run(), batsman.get_average());
+}
+
+void Ipl_Controller::find_top_bowling_avg()
+{
+    this->bowler = analyser.find_top_bowling_avg();
+    view.show_top_bowling_avg(bowler.get_player_name(), bowler.get_average());
 }

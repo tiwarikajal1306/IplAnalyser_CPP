@@ -12,6 +12,7 @@ public:
     void display_best_strike_rate_sixs_and_fours(string cricketer_name, double strike_rate, int six, int four);
     void display_great_average_with_best_strike_rate(string cricketer_name, double avg, double strike_rate);
     void display_Max_run_with_best_avg(string cricketer_name, int run, double avg);
+    void show_top_bowling_avg(string cricketer_name, double avg);
 
 };
 
@@ -57,4 +58,10 @@ void IplAnalyserView::display_great_average_with_best_strike_rate(string cricket
 void IplAnalyserView::display_Max_run_with_best_avg(string cricketer_name, int run, double avg)
 {
     cout << "Name Of Cricketer: " << cricketer_name << "\nRun: " << run << "\nAverage: " << avg << endl;
+}
+
+void IplAnalyserView::show_top_bowling_avg(string cricketer_name, double avg)
+{
+    cout << "Name Of Cricketer: " << cricketer_name << "\nTop Bowling Average: "
+         << avg << endl;
 }
