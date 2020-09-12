@@ -8,18 +8,13 @@ class ipl_analyser
 {
     string file_path = "../resources/MostRuns.csv";
     vector<unordered_map<string, string>> csv_data;
-    vector<IplBatsmanStat> player_records;
+    vector<IplBatsmanStat> batsman_records;
 
 public:
     ipl_analyser()
     {
         this->csv_data = convert_csv_to_object(file_path);
         update_player_record();
-    }
-
-    vector<IplBatsmanStat> get_player_record()
-    {
-        return player_records;
     }
 
     void update_player_record()
@@ -37,41 +32,58 @@ public:
             most_runs.set_hundered(stoi(itr.at("100")));
             most_runs.set_six(stoi(itr.at("6s")));
             most_runs.set_strike_rate(stod(itr.at("SR")));
-            player_records.push_back(most_runs);
+            batsman_records.push_back(most_runs);
         }
     }
 
     IplBatsmanStat find_top_batting_average()
     {
+        vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return (first_batsman.get_average() < second_batsman.get_average());
+            return (first_batsman.get_average() > second_batsman.get_average());
         });
 
-        return player_records[player_records.size() - 1];
+        return player_records.at(0);
     }
 
     IplBatsmanStat find_top_striking_rates()
     {
+        vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return (first_batsman.get_strike_rate() < second_batsman.get_strike_rate());
+            return (first_batsman.get_strike_rate() > second_batsman.get_strike_rate());
         });
 
-        return player_records[player_records.size() - 1];
+        return player_records.at(0);
     }
 
     IplBatsmanStat find_max_six_and_four()
     {
+        vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return ((first_batsman.get_four() < second_batsman.get_four()) && (first_batsman.get_six() < second_batsman.get_six()));
+            return ((first_batsman.get_four() + first_batsman.get_six() > second_batsman.get_four() + second_batsman.get_six()));
         });
 
-        return player_records[player_records.size() - 1];
+        return player_records.at(0);
     }
 
     IplBatsmanStat find_best_strike_rate_with_sixs_and_fours()
     {
+        vector<IplBatsmanStat> player_records = batsman_records;
         sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
-            return ((first_batsman.get_strike_rate() < second_batsman.get_strike_rate()) && (first_batsman.get_four() < second_batsman.get_four()) && (first_batsman.get_six() < second_batsman.get_six()));
+            return ((first_batsman.get_strike_rate() > second_batsman.get_strike_rate()) && 
+                            (first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
+                            + second_batsman.get_four()));
+        });
+
+        return player_records.at(0);
+    }
+
+    IplBatsmanStat find_great_average_with_best_strike_rate()
+    {
+        vector<IplBatsmanStat> player_records = batsman_records;
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return ((first_batsman.get_average() < second_batsman.get_average()) && 
+                            (first_batsman.get_strike_rate() < second_batsman.get_strike_rate()));
         });
 
         return player_records[player_records.size() - 1];
