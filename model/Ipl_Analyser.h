@@ -250,4 +250,28 @@ public:
 
         return player_records.at(0);
     }
+
+    IplBatsmanStat find_max_hundreds_with_best_average()
+    {
+        vector<IplBatsmanStat> player_records = batsman_records;
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return ((first_batsman.get_hundered() > second_batsman.get_hundered()));
+        });
+
+        int max_hundered = player_records.at(0).get_hundered();
+        vector<IplBatsmanStat> max_batsman_hundered;
+        for (IplBatsmanStat itr : player_records)
+        {
+            if (itr.get_hundered() == max_hundered)
+            {
+                max_batsman_hundered.push_back(itr);
+            }
+        }
+
+        sort(max_batsman_hundered.begin(), max_batsman_hundered.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return ((first_batsman.get_average() > second_batsman.get_average()));
+        });
+
+        return max_batsman_hundered.at(0);
+    }
 };
