@@ -274,4 +274,23 @@ public:
 
         return max_batsman_hundered.at(0);
     }
+
+    IplBatsmanStat find_zero_hundered_and_fifty_with_best_avg()
+    {
+        cout << "check" << endl;
+        vector<IplBatsmanStat> player_records;
+        for(IplBatsmanStat itr : batsman_records)
+        {
+            if(itr.get_fifty() + itr.get_hundered() == 0)
+            {
+                player_records.push_back(itr);
+            }
+        }
+
+        sort(player_records.begin(), player_records.end(), [](IplBatsmanStat &first_batsman, IplBatsmanStat &second_batsman) -> bool {
+            return (first_batsman.get_average() > second_batsman.get_average());
+        });
+         
+        return player_records.at(0);
+    }
 };

@@ -21,6 +21,7 @@ public:
     void show_max_batting_and_bowling_average(string cricketer_name, double batting_avg, double bowling_average);
     void show_most_run_and_wicket(string cricketer_name, int run, int wickets);
     void show_max_hundreds_with_best_average(string cricketer_name, int hundered, double average);
+    void show_zero_hundered_and_fifty_with_best_avg(string cricketer_name, int hundered, int fifty, double average);
 };
 
 int IplAnalyserView::take_input_as_choice()
@@ -112,4 +113,10 @@ void IplAnalyserView::show_most_run_and_wicket(string cricketer_name, int run, i
 void IplAnalyserView::show_max_hundreds_with_best_average(string cricketer_name, int hundered, double average)
 {
     cout << "Name Of Cricketer: " << cricketer_name << "\nHundered: " << hundered << "\nAverage: " << average << endl;
+}
+
+void IplAnalyserView::show_zero_hundered_and_fifty_with_best_avg(string cricketer_name, int hundered, int fifty, double average)
+{
+    cout << "Name Of Cricketer: " << cricketer_name << "\nHundered: " << hundered << "\nFifty: " << fifty
+         << "\nBatting Average: " << average << endl;
 }

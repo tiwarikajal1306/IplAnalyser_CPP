@@ -60,7 +60,7 @@ public:
         return run;
     }
 
-    void set_hundered(int hundered)
+    void set_hundered(int hundred)
     {
         this->hundred = hundred;
     }

@@ -32,6 +32,8 @@ public:
     void find_max_batting_and_bowling_average();
     void find_most_run_and_wicket();
     void find_max_hundreds_with_best_average();
+    void find_cricketer_who_had_zero_100s_50s_with_best_average();
+    void find_zero_hundered_and_fifty_with_best_avg();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -62,6 +64,7 @@ void Ipl_Controller ::display_screen()
         BATTING_AVG_BOWLING_AVG,
         MOST_RUN_AND_WICKET,
         MAX_HUNDRED_WITH_BEST_AVERAGE,
+        ZEROS_HUNDREDS_FIFTY,
         CLEAR_SCREEN,
         EXIT
     };
@@ -83,7 +86,8 @@ void Ipl_Controller ::display_screen()
              << "\n13. Find Cricketer Who Had Best Batting And Bowling Average"
              << "\n14. Find Cricketer Who had Most Run And Wicket"
              << "\n15. Find Cricketer who had maximum hundred And Best Average"
-             << "\n16. Clear Screen\n17. Exit\n"
+             << "\n16. Find Cricketer Who Had Zero Hundered And Fifty With Best Average"
+             << "\n17. Clear Screen\n18. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -133,6 +137,9 @@ void Ipl_Controller ::display_screen()
         case choice::MAX_HUNDRED_WITH_BEST_AVERAGE:
             find_max_hundreds_with_best_average();
             break;
+        case choice::ZEROS_HUNDREDS_FIFTY:
+            find_zero_hundered_and_fifty_with_best_avg(); 
+            break;   
         case choice::CLEAR_SCREEN:
             system("cls");
             break;
@@ -238,4 +245,10 @@ void Ipl_Controller::find_max_hundreds_with_best_average()
 {
     this -> batsman = analyser.find_max_hundreds_with_best_average();
     view.show_max_hundreds_with_best_average(batsman.get_player_name(), batsman.get_hundered(), batsman.get_average());
+}
+
+void Ipl_Controller::find_zero_hundered_and_fifty_with_best_avg()
+{
+    this -> batsman = analyser.find_zero_hundered_and_fifty_with_best_avg();
+    view.show_zero_hundered_and_fifty_with_best_avg(batsman.get_player_name(), batsman.get_hundered(), batsman.get_fifty(), batsman.get_average());
 }
