@@ -15,6 +15,7 @@ public:
     void show_top_bowling_avg(string cricketer_name, double avg);
     void show_top_strike_rate_of_bowler(string cricketer_name, double strike_rate);
     void show_best_economy_rate_of_bowler(string cricketer_name, double economy_rate);
+    void show_best_strike_rate_with_5w_4w(string cricketer_name, double strike_rate, int five_wkts, int four_wkts);
 };
 
 int IplAnalyserView::take_input_as_choice()
@@ -75,4 +76,10 @@ void IplAnalyserView::show_top_strike_rate_of_bowler(string cricketer_name, doub
 void IplAnalyserView::show_best_economy_rate_of_bowler(string cricketer_name, double economy_rate)
 {
     cout << "Name Of Cricketer: " << cricketer_name << "\n Economy Rate: " << economy_rate << endl;
+}
+
+void IplAnalyserView::show_best_strike_rate_with_5w_4w(string cricketer_name, double strike_rate, int five_wkts, int four_wkts)
+{
+    cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: " << strike_rate << "\nFive Wickets: " << five_wkts
+         << "\nFour Wickets: " << four_wkts << endl;
 }

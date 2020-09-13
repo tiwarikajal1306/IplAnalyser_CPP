@@ -146,4 +146,28 @@ public:
         });
         return player_records.at(0);
     }
+
+    IplBowler find_best_strike_rate_with_5w_4w()
+    {
+        vector<IplBowler> player_records = bowler_records;
+        sort(player_records.begin(), player_records.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return ((first_bowler.get_four_wkts() + first_bowler.get_five_wkts() > second_bowler.get_four_wkts() + second_bowler.get_five_wkts()));
+        });
+
+        int max_wickets = player_records.at(0).get_five_wkts() + player_records.at(0).get_four_wkts();
+        vector<IplBowler> max_wkts_bowler;
+        for (IplBowler itr : player_records)
+        {
+            if ((itr.get_five_wkts() + itr.get_four_wkts()) == max_wickets)
+            {
+                max_wkts_bowler.push_back(itr);
+            }
+        }
+
+        sort(max_wkts_bowler.begin(), max_wkts_bowler.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return ((first_bowler.get_strike_rate() > second_bowler.get_strike_rate()));
+        });
+
+        return max_wkts_bowler.at(0);
+    }
 };
