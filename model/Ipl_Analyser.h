@@ -1,6 +1,7 @@
 #include "../utility/csv_reader.h"
 #include "IplBatsmanStat.h"
 #include "IplBowling.h"
+#include "IplAllRounder.h"
 #include <algorithm>
 
 using namespace std;
@@ -11,6 +12,7 @@ class ipl_analyser
     vector<unordered_map<string, string>> csv_data;
     vector<IplBatsmanStat> batsman_records;
     vector<IplBowler> bowler_records;
+    vector<IplAllRounder> all_rounder_records;
 
 public:
     void load_csv_file(string file_path_batsman, string file_path_bowler)
@@ -19,6 +21,7 @@ public:
         update_batsman_record();
         this->csv_data = convert_csv_to_object(file_path_bowler);
         update_bowler_record();
+        update_all_rounder_record();
     }
 
     void update_batsman_record()
@@ -55,6 +58,26 @@ public:
             bowler_records.push_back(most_wkts);
         }
     }
+
+     void update_all_rounder_record()
+    {
+        for(IplBatsmanStat batsman_itr : batsman_records)
+        {
+            for (IplBowler bowler_itr : bowler_records)
+            {
+                if(batsman_itr.get_player_name() == bowler_itr.get_player_name())
+                {
+                    IplAllRounder all_rounder(batsman_itr.get_player_name());
+                    all_rounder.set_batsman_run(batsman_itr.get_run());
+                    all_rounder.set_bowler_run(bowler_itr.get_run());
+                    all_rounder.set_bowler_wickets(bowler_itr.get_wickets());
+                    all_rounder.set_batting_avg(batsman_itr.get_average());
+                    all_rounder.set_bowling_avg(bowler_itr.get_average());
+                    all_rounder_records.push_back(all_rounder);
+                }
+            }
+        }
+    }   
 
     IplBatsmanStat find_top_batting_average()
     {
@@ -202,5 +225,17 @@ public:
         });
 
         return max_wkts_bowler.at(0);
+    }
+
+    IplAllRounder find_max_batting_and_bowling_average()
+    {
+        vector<IplAllRounder> player_records = all_rounder_records;
+        sort(player_records.begin(), player_records.end(), [](IplAllRounder &first_all_rounder, IplAllRounder &second_all_rounder) -> bool {
+            return ((first_all_rounder.get_batting_avg() > 
+                second_all_rounder.get_batting_avg())
+                && (first_all_rounder.get_bowling_avg() >  second_all_rounder.get_bowling_avg()));
+        });
+
+        return player_records.at(0);
     }
 };

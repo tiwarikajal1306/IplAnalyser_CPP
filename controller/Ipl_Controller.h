@@ -9,6 +9,7 @@ class Ipl_Controller
     ipl_analyser analyser;
     IplBatsmanStat batsman;
     IplBowler bowler;
+    IplAllRounder all_rounder;
     string file_path_batsman = "../resources/MostRuns.csv";
     string file_path_bowler = "../resources/MostWkts.csv";
 
@@ -28,6 +29,7 @@ public:
     void find_best_strike_rate_with_5w_4w();
     void find_great_bowling_avg_with_best_strike_rate();
     void find_max_wicket_with_best_bowling_average();
+    void find_max_batting_and_bowling_average();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -55,6 +57,7 @@ void Ipl_Controller ::display_screen()
         BEST_STRIKE_RATE_WITH_5W_AND_4W,
         GREAT_BOWLING_AVG_WITH_BEST_STRIKE_RATE,
         MAX_WICKET_WITH_BEST_BOWLING_AVG,
+        BATTING_AVG_BOWLING_AVG,
         CLEAR_SCREEN,
         EXIT
     };
@@ -73,7 +76,8 @@ void Ipl_Controller ::display_screen()
              << "\n10. Find Best Strike Rate With 4W and 5W"
              << "\n11. Find Great Bowling Average With Best Strike Rate"
              << "\n12. Find Maximum Wicket With Best Bowling Average"
-             << "\n13. Clear Screen\n14. Exit\n"
+             << "\n13. Find Player Who Had Batting And Bowling Average"
+             << "\n14. Clear Screen\n15. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -114,6 +118,9 @@ void Ipl_Controller ::display_screen()
         case choice::MAX_WICKET_WITH_BEST_BOWLING_AVG:
             find_max_wicket_with_best_bowling_average();
             break;
+        case choice::BATTING_AVG_BOWLING_AVG:
+            find_max_batting_and_bowling_average();
+            break;    
         case choice::CLEAR_SCREEN:
             system("cls");
             break;
@@ -201,4 +208,10 @@ void Ipl_Controller::find_max_wicket_with_best_bowling_average()
 {
     this->bowler = analyser.find_max_wicket_with_best_bowling_average();
     view.show_max_wicket_with_best_bowling_average(bowler.get_player_name(), bowler.get_wickets(), bowler.get_average());
+}
+
+void Ipl_Controller::find_max_batting_and_bowling_average()
+{
+    this -> all_rounder = analyser.find_max_batting_and_bowling_average();
+    view.show_max_batting_and_bowling_average(all_rounder.get_player_name(), all_rounder.get_batting_avg(), all_rounder.get_bowling_avg());
 }
