@@ -179,4 +179,28 @@ public:
         });
         return player_records.at(0);
     }
+
+    IplBowler find_max_wicket_with_best_bowling_average()
+    {
+        vector<IplBowler> player_records = bowler_records;
+        sort(player_records.begin(), player_records.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return ((first_bowler.get_wickets() > second_bowler.get_wickets()));
+        });
+
+        int max_wickets = player_records.at(0).get_wickets();
+        vector<IplBowler> max_wkts_bowler;
+        for (IplBowler itr : player_records)
+        {
+            if (itr.get_wickets() == max_wickets)
+            {
+                max_wkts_bowler.push_back(itr);
+            }
+        }
+
+        sort(max_wkts_bowler.begin(), max_wkts_bowler.end(), [](IplBowler &first_bowler, IplBowler &second_bowler) -> bool {
+            return ((first_bowler.get_average() > second_bowler.get_average()));
+        });
+
+        return max_wkts_bowler.at(0);
+    }
 };

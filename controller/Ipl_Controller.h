@@ -27,6 +27,7 @@ public:
     void find_best_economy_rate_of_bowler();
     void find_best_strike_rate_with_5w_4w();
     void find_great_bowling_avg_with_best_strike_rate();
+    void find_max_wicket_with_best_bowling_average();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -53,6 +54,7 @@ void Ipl_Controller ::display_screen()
         BEST_ECONOMY_RATE_OF_BOWLER,
         BEST_STRIKE_RATE_WITH_5W_AND_4W,
         GREAT_BOWLING_AVG_WITH_BEST_STRIKE_RATE,
+        MAX_WICKET_WITH_BEST_BOWLING_AVG,
         CLEAR_SCREEN,
         EXIT
     };
@@ -70,7 +72,8 @@ void Ipl_Controller ::display_screen()
              << "\n9. Find Best Economy Rate Of Bowler"
              << "\n10. Find Best Strike Rate With 4W and 5W"
              << "\n11. Find Great Bowling Average With Best Strike Rate"
-             << "\n12. Clear Screen\n13. Exit\n"
+             << "\n12. Find Maximum Wicket With Best Bowling Average"
+             << "\n13. Clear Screen\n14. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -107,6 +110,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::GREAT_BOWLING_AVG_WITH_BEST_STRIKE_RATE:
             find_great_bowling_avg_with_best_strike_rate();
+            break;
+        case choice::MAX_WICKET_WITH_BEST_BOWLING_AVG:
+            find_max_wicket_with_best_bowling_average();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -189,4 +195,10 @@ void Ipl_Controller::find_great_bowling_avg_with_best_strike_rate()
 {
     this->bowler = analyser.find_great_bowling_avg_with_best_strike_rate();
     view.show_great_bowling_avg_with_best_strike_rate(bowler.get_player_name(), bowler.get_average(), bowler.get_strike_rate());
+}
+
+void Ipl_Controller::find_max_wicket_with_best_bowling_average()
+{
+    this->bowler = analyser.find_max_wicket_with_best_bowling_average();
+    view.show_max_wicket_with_best_bowling_average(bowler.get_player_name(), bowler.get_wickets(), bowler.get_average());
 }
