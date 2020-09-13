@@ -30,6 +30,7 @@ public:
     void find_great_bowling_avg_with_best_strike_rate();
     void find_max_wicket_with_best_bowling_average();
     void find_max_batting_and_bowling_average();
+    void find_most_run_and_wicket();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -58,6 +59,7 @@ void Ipl_Controller ::display_screen()
         GREAT_BOWLING_AVG_WITH_BEST_STRIKE_RATE,
         MAX_WICKET_WITH_BEST_BOWLING_AVG,
         BATTING_AVG_BOWLING_AVG,
+        MOST_RUN_AND_WICKET,
         CLEAR_SCREEN,
         EXIT
     };
@@ -76,8 +78,9 @@ void Ipl_Controller ::display_screen()
              << "\n10. Find Best Strike Rate With 4W and 5W"
              << "\n11. Find Great Bowling Average With Best Strike Rate"
              << "\n12. Find Maximum Wicket With Best Bowling Average"
-             << "\n13. Find Player Who Had Batting And Bowling Average"
-             << "\n14. Clear Screen\n15. Exit\n"
+             << "\n13. Find Player Who Had Best Batting And Bowling Average"
+             << "\n14. Find Player Who had Most Run And Wicket"
+             << "\n15. Clear Screen\n16. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -120,7 +123,10 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::BATTING_AVG_BOWLING_AVG:
             find_max_batting_and_bowling_average();
-            break;    
+            break;  
+        case choice::MOST_RUN_AND_WICKET:
+            find_most_run_and_wicket();
+            break;  
         case choice::CLEAR_SCREEN:
             system("cls");
             break;
@@ -214,4 +220,10 @@ void Ipl_Controller::find_max_batting_and_bowling_average()
 {
     this -> all_rounder = analyser.find_max_batting_and_bowling_average();
     view.show_max_batting_and_bowling_average(all_rounder.get_player_name(), all_rounder.get_batting_avg(), all_rounder.get_bowling_avg());
+}
+
+void Ipl_Controller::find_most_run_and_wicket()
+{
+    this->all_rounder = analyser.find_most_run_and_wicket();
+    view.show_most_run_and_wicket(all_rounder.get_player_name(), all_rounder.get_batsman_run(), all_rounder.get_bowler_wickets());
 }

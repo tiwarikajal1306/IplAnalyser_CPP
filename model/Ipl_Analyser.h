@@ -238,4 +238,16 @@ public:
 
         return player_records.at(0);
     }
+
+    IplAllRounder find_most_run_and_wicket()
+    {
+        vector<IplAllRounder> player_records = all_rounder_records;
+        sort(player_records.begin(), player_records.end(), [](IplAllRounder &first_all_rounder, IplAllRounder &second_all_rounder) -> bool {
+            return ((first_all_rounder.get_batsman_run() > 
+                second_all_rounder.get_batsman_run())
+                && (first_all_rounder.get_bowler_wickets() >  second_all_rounder.get_bowler_wickets()));
+        });
+
+        return player_records.at(0);
+    }
 };
