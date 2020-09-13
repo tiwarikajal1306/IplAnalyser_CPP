@@ -24,6 +24,7 @@ public:
     void find_Max_run_with_best_avg();
     void find_top_bowling_avg();
     void find_top_strike_rate_of_bowler();
+    void find_best_economy_rate_of_bowler();
 };
 
 void Ipl_Controller ::show_Welcome_Msg()
@@ -47,6 +48,7 @@ void Ipl_Controller ::display_screen()
         MAX_RUN_WITH_BEST_AVG,
         TOP_BOWLING_AVERAGE,
         TOP_STRIKE_RATE_OF_BOWLER,
+        BEST_ECONOMY_RATE_OF_BOWLER,
         CLEAR_SCREEN,
         EXIT
     };
@@ -61,7 +63,8 @@ void Ipl_Controller ::display_screen()
              << "\n6. Find Max Run With Best Average"
              << "\n7. Find Top Bowling Average"
              << "\n8. Find Top Striking Rate Of Bowler"
-             << "\n9. Clear Screen\n10. Exit\n"
+             << "\n9. Find Best Economy Rate Of Bowler"
+             << "\n10. Clear Screen\n11. Exit\n"
              << endl;
 
         switch (view.take_input_as_choice())
@@ -89,6 +92,9 @@ void Ipl_Controller ::display_screen()
             break;
         case choice::TOP_STRIKE_RATE_OF_BOWLER:
             find_top_strike_rate_of_bowler();
+            break;
+        case choice:: BEST_ECONOMY_RATE_OF_BOWLER:
+            find_best_economy_rate_of_bowler();
             break;
         case choice::CLEAR_SCREEN:
             system("cls");
@@ -153,4 +159,10 @@ void Ipl_Controller::find_top_strike_rate_of_bowler()
 {
     this->bowler = analyser.find_top_strike_rate_of_bowler();
     view.show_top_strike_rate_of_bowler(bowler.get_player_name(), bowler.get_strike_rate());
+}
+
+void Ipl_Controller::find_best_economy_rate_of_bowler()
+{
+    this->bowler = analyser.find_best_economy_rate_of_bowler();
+    view.show_best_economy_rate_of_bowler(bowler.get_player_name(), bowler.get_economy_rate());
 }

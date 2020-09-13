@@ -14,6 +14,7 @@ public:
     void display_Max_run_with_best_avg(string cricketer_name, int run, double avg);
     void show_top_bowling_avg(string cricketer_name, double avg);
     void show_top_strike_rate_of_bowler(string cricketer_name, double strike_rate);
+    void show_best_economy_rate_of_bowler(string cricketer_name, double economy_rate);
 };
 
 int IplAnalyserView::take_input_as_choice()
@@ -69,4 +70,9 @@ void IplAnalyserView::show_top_bowling_avg(string cricketer_name, double avg)
 void IplAnalyserView::show_top_strike_rate_of_bowler(string cricketer_name, double strike_rate)
 {
     cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: " << strike_rate << endl;
+}
+
+void IplAnalyserView::show_best_economy_rate_of_bowler(string cricketer_name, double economy_rate)
+{
+    cout << "Name Of Cricketer: " << cricketer_name << "\n Economy Rate: " << economy_rate << endl;
 }
